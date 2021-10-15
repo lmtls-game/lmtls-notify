@@ -2,37 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.20/dist/vue.global.prod.js"></script>
     <link rel="stylesheet" href="index.css">
+    <script defer src="main.js"></script>
     <title>Notify</title>
 </head>
 <body>
-<div class="dialog error">
+<div id="dialog" class="dialog">
     <div class="dialog__container">
-        <div class="dialog__actions">
+        <div id="dialogActions" class="dialog__actions">
             <!--                    todo: placeholder -->
-            <div class="action">
-                <div class="action__key">[ESC]</div>
-                <div class="action__description">TO CLOSE</div>
-            </div>
-
-            <div class="action">
-                <div class="action__key">[ENTER]</div>
-                <div class="action__description">TO CONTINUE</div>
-            </div>
         </div>
 
         <div class="dialog__content">
             <div class="dialog__icon"></div>
-            <div class="dialog__title">
+            <div id="dialogTitle" class="dialog__title">
                 <!--                    todo: placeholder -->
-                ERROR!
             </div>
 
-            <div class="dialog__description">
+            <div id="dialogDescription" class="dialog__description">
                 <!--                    todo: placeholder -->
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam beatae blanditiis dolorem, eum facilis ipsam, labore maiores molestiae molestias quaerat quas qui quo reiciendis rerum
-                saepe similique sint vero vitae!
             </div>
         </div>
     </div>
