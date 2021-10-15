@@ -1,0 +1,138 @@
+@font-face {
+    font-family: Thedus-Bold;
+    src: url("assets/ThedusCondensedLight-Bold.otf") format("opentype");
+}
+
+@font-face {
+    font-family: Thedus-Regular;
+    src: url("assets/ThedusCondensedLight-Regular.otf") format("opentype");
+}
+
+
+*, *:before, *:after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: var(--f-regular);
+}
+
+:root {
+    --f-bold: 'Thedus-Bold';
+    --f-regular: 'Thedus-Regular';
+}
+
+.dialog {
+    background: linear-gradient(0deg, rgba(118, 18, 17, .98) 0%, rgba(118, 18, 17, 1) 0%, rgba(0, 0, 0, 1) 30%);
+    width: 100%;
+    height: 100%;
+    color: white;
+}
+
+.dialog .dialog__container {
+    width: 47.08313077297034vw;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+}
+
+.dialog .dialog__actions {
+    display: flex;
+    margin-left: auto;
+    margin-bottom: 13px;
+}
+
+.dialog .action {
+    display: flex;
+    margin-left: 28px;
+    font-size: 20px;
+}
+
+.dialog .action__key {
+    color: #CCED00;
+    font-family: var(--f-bold);
+}
+
+.dialog .action__description {
+    margin-left: 4px;
+    color: #949494;
+}
+
+.dialog .dialog__icon {
+    position: absolute;
+    left: -22px;
+    top: -22px;
+    background-color: #000000;
+    width: 60px;
+    height: 60px;
+}
+
+.dialog .dialog__content {
+    padding: 21px 38px;
+    position: relative;
+}
+
+.dialog .dialog__title {
+    font-size: 48px;
+    font-family: var(--f-bold);
+}
+
+.dialog .dialog__description {
+    font-size: 28px;
+}
+
+.dialog.error {
+    background: linear-gradient(0deg, rgba(118, 18, 17, .98) 0%, rgba(118, 18, 17, 1) 0%, rgba(0, 0, 0, 1) 30%);
+}
+
+.dialog.error .dialog__content{
+    border: 3px solid #CF291D;
+}
+
+.dialog.error .dialog__icon {
+    background-image: url('assets/bx_bx-error-alt.svg');
+}
+
+.dialog.error .dialog__title {
+    color: #CF291D;
+}
+
+.dialog.success {
+    background: linear-gradient(0deg, rgb(204, 237, 0) 0%, rgb(204, 237, 0) 0%, rgba(0, 0, 0, 1) 30%);
+}
+
+.dialog.success .dialog__content{
+    border: 3px solid #CCED00;
+}
+
+.dialog.success .dialog__icon {
+    background-image: url('assets/clarity_success-standard-line.svg');
+}
+
+.dialog.success .dialog__title {
+    color: #CCED00;
+}
+
+
+.dialog.information {
+    background: linear-gradient(0deg, rgb(239, 239, 239) 0%, rgb(239, 239, 239) 10%, rgba(0, 0, 0, 1) 30%);
+}
+
+.dialog.information .dialog__content{
+    border: 3px solid #EFEFEF;
+}
+
+.dialog.information .dialog__icon {
+    background-image: url('assets/bx_bx-information-alt.svg');
+}
+
+.dialog.information .dialog__title {
+    color: #EFEFEF;
+}
