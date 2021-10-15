@@ -30,6 +30,7 @@ html, body {
     width: 100%;
     height: 100%;
     color: white;
+    background-color: black;
 }
 
 .dialog .dialog__container {
@@ -121,7 +122,6 @@ html, body {
 
 
 .dialog.information {
-    background: linear-gradient(0deg, rgb(239, 239, 239) 0%, rgb(239, 239, 239) 10%, rgba(0, 0, 0, 1) 30%);
 }
 
 .dialog.information .dialog__content{
@@ -133,5 +133,5 @@ html, body {
 }
 
 .dialog.information .dialog__title {
-    color: #CCED00;
+    color: #EFEFEF;
 }
