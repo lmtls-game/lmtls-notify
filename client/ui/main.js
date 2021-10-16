@@ -6,7 +6,11 @@ const dialogActions = dialog.querySelector("#dialogActions");
 let registeredActions = {};
 
 document.onkeyup = function (e) {
-    const registeredAction = registeredActions[e.code.toLowerCase()]
+    if (!registeredActions) {
+        return;
+    }
+
+    const registeredAction = registeredActions[e.code.toLowerCase()];
     if (!registeredAction) {
         return;
     }
@@ -35,6 +39,7 @@ function setDialog(title, description, actions) {
     if (!Array.isArray(actions)) {
         return;
     }
+    registeredActions = {};
     for (const action of actions) {
         let actionElement = createActionElement(action.code, action.description);
         registeredActions[action.code.toLowerCase()] = action;
