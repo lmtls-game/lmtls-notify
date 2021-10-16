@@ -3,6 +3,20 @@ const dialogTitle = dialog.querySelector("#dialogTitle");
 const dialogDescription = dialog.querySelector("#dialogDescription");
 const dialogActions = dialog.querySelector("#dialogActions");
 
+let registeredActions = {};
+
+document.onkeyup = function (e) {
+    const registeredAction = registeredActions[e.code.toLowerCase()]
+    if (!registeredAction) {
+        return;
+    }
+    triggerCallback(registeredAction);
+};
+
+function triggerCallback(action) {
+    //todo
+}
+
 function createActionElement(key, description) {
     const actionElement = document.createElement("action");
     actionElement.innerHTML = `
@@ -22,7 +36,8 @@ function setDialog(title, description, actions) {
         return;
     }
     for (const action of actions) {
-        let actionElement = createActionElement(action.key, action.description);
+        let actionElement = createActionElement(action.code, action.description);
+        registeredActions[action.code.toLowerCase()] = action;
         dialogActions.appendChild(actionElement);
     }
 }
@@ -44,8 +59,8 @@ function setDialogAsSuccess(description, actions) {
 
 (function () {
     setDialogAsSuccess("This is a message", [
-        { key: "ESC", description: "CLOSE" },
-        { key: "R", description: "Reload" },
-        { key: "ENTER", description: "CONTINUE" }
+        { code: "ESCAPE", description: "CLOSE" },
+        { code: "R", description: "Reload" },
+        { code: "ENTER", description: "CONTINUE" }
     ]);
 })();
