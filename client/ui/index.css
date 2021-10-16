@@ -24,6 +24,9 @@ html, body {
 :root {
     --f-bold: 'Thedus-Bold';
     --f-regular: 'Thedus-Regular';
+    --clr-success: #CCED00;
+    --clr-information: #EFEFEF;
+    --clr-error: #CF291D;
 }
 
 .dialog {
@@ -89,11 +92,11 @@ html, body {
 }
 
 .dialog.error {
-    background: linear-gradient(0deg, rgba(118, 18, 17, .98) 0%, rgba(118, 18, 17, 1) 0%, rgba(0, 0, 0, 1) 30%);
+    background: linear-gradient(0deg, rgb(207, 41, 29) 0%, rgb(207, 41, 29) 0%, rgba(0, 0, 0, 1) 30%);
 }
 
 .dialog.error .dialog__content{
-    border: 3px solid #CF291D;
+    border: 3px solid var(--clr-error);
 }
 
 .dialog.error .dialog__icon {
@@ -101,7 +104,7 @@ html, body {
 }
 
 .dialog.error .dialog__title {
-    color: #CF291D;
+    color: var(--clr-error);
 }
 
 .dialog.success {
@@ -109,7 +112,7 @@ html, body {
 }
 
 .dialog.success .dialog__content{
-    border: 3px solid #CCED00;
+    border: 3px solid var(--clr-success);
 }
 
 .dialog.success .dialog__icon {
@@ -117,15 +120,14 @@ html, body {
 }
 
 .dialog.success .dialog__title {
-    color: #CCED00;
+    color: var(--clr-success);
 }
-
 
 .dialog.information {
 }
 
 .dialog.information .dialog__content{
-    border: 3px solid #EFEFEF;
+    border: 3px solid var(--clr-information);
 }
 
 .dialog.information .dialog__icon {
@@ -133,5 +135,5 @@ html, body {
 }
 
 .dialog.information .dialog__title {
-    color: #EFEFEF;
+    color: var(--clr-information);
 }
