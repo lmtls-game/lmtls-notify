@@ -1,3 +1,6 @@
 [submodule "require"]
 	path = require
 	url = git@github.com:lmtls-game/require.git
+[submodule "varguard"]
+	path = varguard
+	url = git@github.com:0xWaleed/lua-varguard.git
