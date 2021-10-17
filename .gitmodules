@@ -1,0 +1,3 @@
+[submodule "require"]
+	path = require
+	url = git@github.com:lmtls-game/require.git
