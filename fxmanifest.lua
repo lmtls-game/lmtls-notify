@@ -10,6 +10,8 @@ game 'common'
 
 shared_script 'require/require.lua'
 
+client_script 'dialog.lua'
+
 local function ui(f) file(string.format('client/ui/%s', f))  end
 local function ui_file(f) return file(ui(f)) end
 

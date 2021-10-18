@@ -1,9 +1,10 @@
-const dialog = document.getElementById("dialog");
-const dialogTitle = dialog.querySelector("#dialogTitle");
-const dialogDescription = dialog.querySelector("#dialogDescription");
-const dialogActions = dialog.querySelector("#dialogActions");
+const dialogElement = document.getElementById("dialog");
+const dialogTitleElement = dialogElement.querySelector("#dialogTitle");
+const dialogDescriptionElement = dialogElement.querySelector("#dialogDescription");
+const dialogActionsElement = dialogElement.querySelector("#dialogActions");
 
 let registeredActions = {};
+const nuiMessageHandlers = {};
 
 document.onkeyup = function (e) {
     if (!registeredActions) {
@@ -33,9 +34,9 @@ function createActionElement(key, description) {
 }
 
 function setDialog(title, description, actions) {
-    dialogTitle.textContent = title;
-    dialogDescription.textContent = description;
-    dialogActions.innerHTML = "";
+    dialogTitleElement.textContent = title;
+    dialogDescriptionElement.textContent = description;
+    dialogActionsElement.innerHTML = "";
     if (!Array.isArray(actions)) {
         return;
     }
@@ -43,29 +44,58 @@ function setDialog(title, description, actions) {
     for (const action of actions) {
         let actionElement = createActionElement(action.code, action.description);
         registeredActions[action.code.toLowerCase()] = action;
-        dialogActions.appendChild(actionElement);
+        dialogActionsElement.appendChild(actionElement);
     }
 }
 
 function setDialogAsInformation(description, actions) {
-    dialog.className = "dialog information";
+    dialogElement.className = "dialog information";
     setDialog("INFORMATION", description, actions);
 }
 
 function setDialogAsError(description, actions) {
-    dialog.className = "dialog error";
+    dialogElement.className = "dialog error";
     setDialog("ERROR", description, actions);
 }
 
 function setDialogAsSuccess(description, actions) {
-    dialog.className = "dialog success";
+    dialogElement.className = "dialog success";
     setDialog("SUCCESS", description, actions);
 }
 
+function dialog(data) {
+    const type = data.type;
+
+    if (!type) {
+        throw new Error('Expected type to be defined');
+    }
+
+    const dialogHandlers = {
+        success: setDialogAsSuccess,
+        information: setDialogAsInformation,
+        error: setDialogAsError
+    };
+
+    const dialogTypeHandler = dialogHandlers[type.toLowerCase()];
+
+    if (!dialogTypeHandler) {
+        throw new Error(`Invalid dialog type ${type}`);
+    }
+
+    dialogTypeHandler(data.description, data.actions)
+}
+
+function messageHandler(event) {
+    event.data ??= event.detail;
+    const { message, data } = event.data;
+    const handler = nuiMessageHandlers[message];
+    if (!handler) {
+        throw new Error("Unknown message handler");
+    }
+
+    handler(data);
+}
+
 (function () {
-    setDialogAsSuccess("This is a message", [
-        { code: "ESCAPE", description: "CLOSE" },
-        { code: "R", description: "Reload" },
-        { code: "ENTER", description: "CONTINUE" }
-    ]);
+    window.addEventListener("message", messageHandler);
 })();
