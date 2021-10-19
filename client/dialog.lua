@@ -22,12 +22,17 @@ function notify_dialog(dialog)
     local id = generate_id()
     dialog.id = id
     g_dialogsSessions[id] = dialog;
+
+    for _, action in ipairs(dialog.actions) do
+        action.instanceId = id
+    end
+
     core_send_nui_message('dialog', dialog)
 end
 
 
 core_register_nui_callback('dialog-callback', function(data)
-    local id = data.id
+    local id = data.instanceId
     local key = data.key
     print(id, key) -- testing
 end)

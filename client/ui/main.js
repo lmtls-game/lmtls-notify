@@ -138,7 +138,8 @@ if (!isCFX) {
             {
                 key: "ESCAPE",
                 code: "escape",
-                description: "TO ESCAPE"
+                description: "TO ESCAPE",
+                instanceId: 'mock-id'
             }
         ]
     };
