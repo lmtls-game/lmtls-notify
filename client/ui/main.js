@@ -6,6 +6,26 @@ const dialogActionsElement = dialogElement.querySelector("#dialogActions");
 let registeredActions = {};
 const nuiMessageHandlers = {};
 
+const isCFX = window["GetResourceName"] !== undefined;
+
+if (!window.GetResourceName) {
+    function GetResourceName() {
+        return "mocked-resource-name";
+    }
+}
+
+function triggerNuiCallback(callback, data) {
+    return fetch(`https://${GetResourceName()}/${callback}`, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" }
+    }).then((r) => r.json());
+}
+
+function triggerDialogCallback(data) {
+    return triggerNuiCallback("dialog-response", data);
+}
+
 document.onkeyup = function (e) {
     if (!registeredActions) {
         return;
@@ -19,7 +39,7 @@ document.onkeyup = function (e) {
 };
 
 function triggerCallback(action) {
-    //todo
+    triggerDialogCallback(action);
 }
 
 function createActionElement(key, description) {
@@ -63,11 +83,11 @@ function setDialogAsSuccess(description, actions) {
     setDialog("SUCCESS", description, actions);
 }
 
-function dialog(data) {
+function onDialogMessage(data) {
     const type = data.type;
 
     if (!type) {
-        throw new Error('Expected type to be defined');
+        throw new Error("Expected type to be defined");
     }
 
     const dialogHandlers = {
@@ -82,7 +102,7 @@ function dialog(data) {
         throw new Error(`Invalid dialog type ${type}`);
     }
 
-    dialogTypeHandler(data.description, data.actions)
+    dialogTypeHandler(data.description, data.actions);
 }
 
 function messageHandler(event) {
@@ -97,5 +117,41 @@ function messageHandler(event) {
 }
 
 (function () {
+    nuiMessageHandlers["dialog"] = onDialogMessage;
     window.addEventListener("message", messageHandler);
 })();
+
+
+if (!isCFX) {
+    window.fetch = function (url, options) {
+        console.log("TRIGGERING CALLBACK", url, options);
+        return Promise.resolve({
+            json: () => {
+            }
+        });
+    };
+    const mockDialog = {
+        id: "mock-id",
+        type: "information",
+        description: "This is mocked message",
+        actions: [
+            {
+                key: "ESCAPE",
+                code: "escape",
+                description: "TO ESCAPE"
+            }
+        ]
+    };
+
+    function sendNuiMessage(message, data) {
+        console.log("SENDING_NUI_EVENT", message, data);
+        window.dispatchEvent(new CustomEvent("message", {
+            detail: {
+                message,
+                data
+            }
+        }));
+    }
+
+    setTimeout(() => sendNuiMessage("dialog", mockDialog), 1000);
+}

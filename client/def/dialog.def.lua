@@ -6,6 +6,8 @@
 ---
 ---@class Action
 ---@field key string
+---@field code string
+---@field description string
 ---@field callback function
 Action = {}
 
