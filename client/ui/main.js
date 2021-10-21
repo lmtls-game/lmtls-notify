@@ -6,16 +6,16 @@ const dialogActionsElement = dialogElement.querySelector("#dialogActions");
 let registeredActions = {};
 const nuiMessageHandlers = {};
 
-const isCFX = window["GetResourceName"] !== undefined;
+const isCFX = window["GetParentResourceName"] !== undefined;
 
-if (!window.GetResourceName) {
-    function GetResourceName() {
+if (!window.GetParentResourceName) {
+    function GetParentResourceName() {
         return "mocked-resource-name";
     }
 }
 
 function triggerNuiCallback(callback, data) {
-    return fetch(`https://${GetResourceName()}/${callback}`, {
+    return fetch(`https://${GetParentResourceName()}/${callback}`, {
         method: "POST",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" }
