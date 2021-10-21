@@ -11,9 +11,10 @@ shared_script 'require/require.lua'
 
 client_script 'client/dialog.lua'
 
-ui_page('client/ui/index.html')
+ui_page 'client/ui/index.html'
 
-ui_file 'client/ui/index.html'
-ui_file 'client/ui/**/*.js'
-ui_file 'client/ui/**/*.ttf'
-ui_file 'client/ui/**/*.svg'
+file 'client/ui/index.html'
+file 'client/ui/**/*.css'
+file 'client/ui/**/*.js'
+file 'client/ui/**/*.otf'
+file 'client/ui/**/*.svg'
