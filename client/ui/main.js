@@ -23,7 +23,7 @@ function triggerNuiCallback(callback, data) {
 }
 
 function triggerDialogCallback(data) {
-    return triggerNuiCallback("dialog-response", data);
+    return triggerNuiCallback("dialog-callback", data);
 }
 
 document.onkeyup = function (e) {
