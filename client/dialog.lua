@@ -4,6 +4,7 @@
 ---
 
 cfx_require('lmtls-core-client.nui')
+cfx_require('lmtls-core-shared.command')
 cfx_require('~.varguard.varguard')
 
 local g_dialogsSessions = {}
@@ -11,16 +12,16 @@ local g_dialogsSessions = {}
 ---@param dialog Dialog
 function notify_dialog(dialog)
     local status, output = VarGuard({
-        type = 'required|type:string',
+        type        = 'required|type:string',
         description = 'required|type:string',
-        actions = 'required|type:array',
+        actions     = 'required|type:table',
     }, dialog):validate()
     if not status then
         error(output)
     end
 
-    local id = generate_id()
-    dialog.id = id
+    local id              = generate_id()
+    dialog.id             = id
     g_dialogsSessions[id] = dialog;
 
     for _, action in ipairs(dialog.actions) do
@@ -31,10 +32,21 @@ function notify_dialog(dialog)
     core_nui_enable_keyboard()
 end
 
-
 core_register_nui_callback('dialog-callback', function(data)
-    local id = data.instanceId
+    local id  = data.instanceId
     local key = data.key
     print(id, key) -- testing
     core_nui_disable_keyboard()
+end)
+
+core_register_command('dev:notify:dialog', function(_, args)
+    notify_dialog({
+        type        = args[1] or 'success',
+        description = args[2] or 'This is the description',
+        actions     = {
+            code        = 'ESCAPE',
+            key         = 'ESC',
+            description = 'ESCAPE IT'
+        }
+    })
 end)
