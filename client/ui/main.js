@@ -40,6 +40,7 @@ document.onkeyup = function (e) {
 
 function triggerCallback(action) {
     triggerDialogCallback(action);
+    dialogElement.style.display = "none";
 }
 
 function createActionElement(key, description) {
@@ -66,6 +67,7 @@ function setDialog(title, description, actions) {
         registeredActions[action.code.toLowerCase()] = action;
         dialogActionsElement.appendChild(actionElement);
     }
+    dialogElement.style.display = "block";
 }
 
 function setDialogAsInformation(description, actions) {
@@ -139,7 +141,7 @@ if (!isCFX) {
                 key: "ESCAPE",
                 code: "escape",
                 description: "TO ESCAPE",
-                instanceId: 'mock-id'
+                instanceId: "mock-id"
             }
         ]
     };
