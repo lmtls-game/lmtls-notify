@@ -28,6 +28,7 @@ function notify_dialog(dialog)
     end
 
     core_send_nui_message('dialog', dialog)
+    core_nui_enable_keyboard()
 end
 
 
@@ -35,4 +36,5 @@ core_register_nui_callback('dialog-callback', function(data)
     local id = data.instanceId
     local key = data.key
     print(id, key) -- testing
+    core_nui_disable_keyboard()
 end)
