@@ -5,7 +5,6 @@
 
 cfx_require('lmtls-core-client.nui')
 cfx_require('lmtls-core-shared.command')
-cfx_require('~.varguard.varguard')
 
 local g_dialogsSessions = {}
 

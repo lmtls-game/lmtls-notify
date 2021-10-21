@@ -8,6 +8,7 @@ fx_version 'cerulean'
 game 'common'
 
 shared_script 'require/require.lua'
+shared_script 'varguard/varguard.lua'
 
 client_script 'client/dialog.lua'
 
