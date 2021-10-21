@@ -51,9 +51,11 @@ core_register_command('dev:notify:dialog', function(_, args)
         type        = args[1] or 'success',
         description = args[2] or 'This is the description',
         actions     = {
-            code        = 'ESCAPE',
-            key         = 'ESC',
-            description = 'ESCAPE IT'
+            {
+                code        = 'ESCAPE',
+                key         = 'ESC',
+                description = 'ESCAPE IT'
+            }
         }
     })
 end)
