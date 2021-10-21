@@ -6,7 +6,15 @@
 cfx_require('lmtls-core-client.nui')
 cfx_require('lmtls-core-shared.command')
 
-local g_dialogsSessions = {}
+local g_dialogsSessions   = {}
+
+local g_dialogIncremental = 1
+
+local function generate_id()
+    local id            = g_dialogIncremental
+    g_dialogIncremental = g_dialogIncremental + 1
+    return tostring(id)
+end
 
 ---@param dialog Dialog
 function notify_dialog(dialog)
