@@ -50,7 +50,7 @@ html, body {
 .dialog .dialog__actions {
     display: flex;
     margin-left: auto;
-    margin-bottom: 13px;
+    margin-bottom: .3em;
     font-size: 1.25rem;
 }
 
