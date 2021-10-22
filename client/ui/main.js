@@ -6,8 +6,6 @@ const dialogActionsElement = dialogElement.querySelector("#dialogActions");
 let registeredActions = {};
 const nuiMessageHandlers = {};
 
-const isCFX = window["GetParentResourceName"] !== undefined;
-
 if (!window.GetParentResourceName) {
     function GetParentResourceName() {
         return "mocked-resource-name";
@@ -122,39 +120,3 @@ function messageHandler(event) {
     nuiMessageHandlers["dialog"] = onDialogMessage;
     window.addEventListener("message", messageHandler);
 })();
-
-
-if (!isCFX) {
-    window.fetch = function (url, options) {
-        console.log("TRIGGERING CALLBACK", url, options);
-        return Promise.resolve({
-            json: () => {
-            }
-        });
-    };
-    const mockDialog = {
-        id: "mock-id",
-        type: "information",
-        description: "This is mocked message",
-        actions: [
-            {
-                key: "ESCAPE",
-                code: "escape",
-                description: "TO ESCAPE",
-                instanceId: "mock-id"
-            }
-        ]
-    };
-
-    function sendNuiMessage(message, data) {
-        console.log("SENDING_NUI_EVENT", message, data);
-        window.dispatchEvent(new CustomEvent("message", {
-            detail: {
-                message,
-                data
-            }
-        }));
-    }
-
-    setTimeout(() => sendNuiMessage("dialog", mockDialog), 1000);
-}
