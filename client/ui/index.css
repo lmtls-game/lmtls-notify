@@ -44,7 +44,7 @@ html, body {
     transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
-    max-width: 970px;
+    max-width: 1200px;
 }
 
 .dialog .dialog__actions {
@@ -56,7 +56,6 @@ html, body {
 .dialog .action {
     display: flex;
     margin-left: 28px;
-    font-size: 20px;
 }
 
 .dialog .action__key {
@@ -84,12 +83,12 @@ html, body {
 }
 
 .dialog .dialog__title {
-    font-size: 48px;
+    font-size: 3rem;
     font-family: var(--f-bold);
 }
 
 .dialog .dialog__description {
-    font-size: 28px;
+    font-size: 1.75rem;
 }
 
 .dialog.error {
@@ -137,4 +136,9 @@ html, body {
 
 .dialog.information .dialog__title {
     color: var(--clr-information);
+}
+
+
+:root {
+    font-size: .5vw;
 }
