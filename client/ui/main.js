@@ -63,7 +63,7 @@ function setDialog(title, description, actions) {
     }
     registeredActions = {};
     for (const action of actions) {
-        let actionElement = createActionElement(action.code, action.description);
+        let actionElement = createActionElement(action.key, action.description);
         registeredActions[action.code.toLowerCase()] = action;
         dialogActionsElement.appendChild(actionElement);
     }
