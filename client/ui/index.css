@@ -51,6 +51,7 @@ html, body {
     display: flex;
     margin-left: auto;
     margin-bottom: 13px;
+    font-size: 1.25rem;
 }
 
 .dialog .action {
