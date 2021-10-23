@@ -5,6 +5,7 @@ const dialogActionsElement = dialogElement.querySelector("#dialogActions");
 
 let registeredActions = {};
 const nuiMessageHandlers = {};
+const dialogQueue = [];
 
 if (!window.GetParentResourceName) {
     function GetParentResourceName() {
@@ -38,7 +39,13 @@ document.onkeyup = function (e) {
 
 function triggerCallback(action) {
     triggerDialogCallback(action);
-    dialogElement.style.display = "none";
+
+    dialogQueue.shift();
+
+    if (dialogQueue.length === 0)
+        dialogElement.style.display = "none";
+    else
+        dialogQueue[0]();
 }
 
 function createActionElement(key, description) {
@@ -102,7 +109,14 @@ function onDialogMessage(data) {
         throw new Error(`Invalid dialog type ${type}`);
     }
 
-    dialogTypeHandler(data.description, data.actions);
+
+    dialogQueue.push(() => {
+        dialogTypeHandler(data.description, data.actions);
+    });
+
+    if (dialogQueue.length === 1) {
+        dialogQueue[0]();
+    }
 }
 
 function messageHandler(event) {

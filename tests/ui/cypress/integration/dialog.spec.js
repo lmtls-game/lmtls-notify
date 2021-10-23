@@ -1,12 +1,5 @@
 const APP_URL = "http://localhost:8080/lmtls-notify/client/ui/index.html?_ijt=hk62kdha99tuf2lja51tgnosve&_ij_reload=RELOAD_ON_SAVE";
 
-window.fetch = function (url, options) {
-    console.log("TRIGGERING CALLBACK", url, options);
-    return Promise.resolve({
-        json: () => {
-        }
-    });
-};
 const mockDialog = {
     id: "mock-id",
     type: "information",
@@ -54,6 +47,7 @@ describe("message invoked", () =>
 {
     beforeEach(() => {
         cy.visit(APP_URL);
+        cy.intercept("POST", "https://mocked-resource-name/dialog-callback", { json: () => "" });
     });
 
     it("should change the display when getting a message", () =>
@@ -86,5 +80,17 @@ describe("message invoked", () =>
         cy.document().trigger("keyup", { code: "wrong-key" });
         cy.get("#dialog").should("have.css", "display")
             .and("equals", "block");
+    });
+
+    it("should able to queue multiple dialogs", () =>
+    {
+        sendNuiMessage("dialog", mockDialog);
+        sendNuiMessage("dialog", mockDialog);
+        cy.document().trigger("keyup", { code: mockDialog.actions[0].code });
+        cy.get("#dialog").should("have.css", "display")
+            .and("equals", "block");
+        cy.document().trigger("keyup", { code: mockDialog.actions[0].code });
+        cy.get("#dialog").should("have.css", "display")
+            .and("equals", "none");
     });
 });
