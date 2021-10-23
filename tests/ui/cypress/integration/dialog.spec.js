@@ -47,7 +47,7 @@ describe("message invoked", () =>
 {
     beforeEach(() => {
         cy.visit(APP_URL);
-        cy.intercept("POST", "https://mocked-resource-name/dialog-callback", { json: () => "" });
+        cy.intercept("POST", "https://mocked-resource-name/dialog-callback", { json: () => "" }).as("nuiDialogCallback");
     });
 
     it("should change the display when getting a message", () =>
@@ -80,6 +80,15 @@ describe("message invoked", () =>
         cy.document().trigger("keyup", { code: "wrong-key" });
         cy.get("#dialog").should("have.css", "display")
             .and("equals", "block");
+    });
+
+    it("should invoke nui callback api call", () =>
+    {
+        sendNuiMessage("dialog", mockDialog);
+        cy.document().trigger("keyup", { code: mockDialog.actions[0].code });
+        cy.wait("@nuiDialogCallback")
+            .its("request.url")
+            .should("include", "dialog-callback");
     });
 
     it("should able to queue multiple dialogs", () =>
