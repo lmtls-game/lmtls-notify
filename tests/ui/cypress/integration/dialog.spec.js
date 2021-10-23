@@ -47,7 +47,8 @@ describe("message invoked", () =>
 {
     beforeEach(() => {
         cy.visit(APP_URL);
-        cy.intercept("POST", "https://mocked-resource-name/dialog-callback", { json: () => "" }).as("nuiDialogCallback");
+        cy.intercept("POST", "https://mocked-resource-name/dialog-callback", {}).as("nuiDialogCallback");
+        cy.intercept("POST", "https://mocked-resource-name/disable-focus-callback", {}).as("nuiDisableFocusCallback");
     });
 
     it("should change the display when getting a message", () =>
@@ -112,5 +113,15 @@ describe("message invoked", () =>
         cy.document().trigger("keyup", { code: mockDialog.actions[0].code });
         cy.wait("@nuiDialogCallback");
         cy.get("@nuiDialogCallback.all").should("have.length", 2);
+    });
+
+    it("should invoke nui disable focus for last dialog action", () =>
+    {
+        sendNuiMessage("dialog", mockDialog);
+        sendNuiMessage("dialog", mockDialog);
+        cy.document().trigger("keyup", { code: mockDialog.actions[0].code });
+        cy.document().trigger("keyup", { code: mockDialog.actions[0].code });
+        cy.wait("@nuiDisableFocusCallback").its("request.url").should("include", "disable-focus-callback");
+        cy.get("@nuiDisableFocusCallback.all").should("have.length", 1);
     });
 });

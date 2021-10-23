@@ -18,7 +18,9 @@ function triggerNuiCallback(callback, data) {
         method: "POST",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" }
-    }).then((r) => r.json());
+    }).then(r => {
+        return r.json();
+    })
 }
 
 function triggerDialogCallback(data) {
@@ -42,9 +44,10 @@ function triggerCallback(action) {
 
     dialogQueue.shift();
 
-    if (dialogQueue.length === 0)
+    if (dialogQueue.length === 0) {
         dialogElement.style.display = "none";
-    else
+        triggerNuiCallback("disable-focus-callback");
+    } else
         dialogQueue[0]();
 }
 

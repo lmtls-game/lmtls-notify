@@ -43,6 +43,9 @@ core_register_nui_callback('dialog-callback', function(data)
     local id  = data.instanceId
     local key = data.key
     print(id, key) -- testing
+end)
+
+core_register_nui_callback('disable-focus-callback', function(_)
     core_nui_disable_keyboard()
 end)
 
