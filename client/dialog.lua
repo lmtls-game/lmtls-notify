@@ -36,7 +36,7 @@ function notify_dialog(dialog)
     end
 
     core_send_nui_message('dialog', dialog)
-    core_nui_enable_keyboard()
+    core_nui_enable_focus()
 end
 
 core_register_nui_callback('dialog-callback', function(data)
@@ -46,7 +46,7 @@ core_register_nui_callback('dialog-callback', function(data)
 end)
 
 core_register_nui_callback('disable-focus-callback', function(_)
-    core_nui_disable_keyboard()
+    core_nui_disable_focus()
 end)
 
 core_register_command('dev:notify:dialog', function(_, args)
