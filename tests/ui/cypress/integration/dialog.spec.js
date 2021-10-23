@@ -102,4 +102,15 @@ describe("message invoked", () =>
         cy.get("#dialog").should("have.css", "display")
             .and("equals", "none");
     });
+
+    it("should invoke nui dialog callback for each dialog", () =>
+    {
+        sendNuiMessage("dialog", mockDialog);
+        sendNuiMessage("dialog", mockDialog);
+        cy.document().trigger("keyup", { code: mockDialog.actions[0].code });
+        cy.wait("@nuiDialogCallback");
+        cy.document().trigger("keyup", { code: mockDialog.actions[0].code });
+        cy.wait("@nuiDialogCallback");
+        cy.get("@nuiDialogCallback.all").should("have.length", 2);
+    });
 });
