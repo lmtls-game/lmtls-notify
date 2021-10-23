@@ -42,7 +42,7 @@ end
 core_register_nui_callback('dialog-callback', function(action)
     local id     = action.instanceId
     local dialog = g_dialogsSessions[id]
-    cfx_require('lmtls-core-shared.inspect')(dialog)
+    print(cfx_require('lmtls-core-shared.inspect')(dialog))
 end)
 
 core_register_nui_callback('disable-focus-callback', function(_)

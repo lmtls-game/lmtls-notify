@@ -12,6 +12,8 @@ shared_script 'varguard/varguard.lua'
 
 client_script 'client/dialog.lua'
 
+client_script 'client/exports.lua' --last
+
 ui_page 'client/ui/index.html'
 
 file 'client/ui/index.html'
