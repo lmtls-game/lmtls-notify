@@ -4,4 +4,4 @@
 ---
 
 
-exports('notify_dialog', notify_dialog)
+exports('dialog', notify_dialog)
