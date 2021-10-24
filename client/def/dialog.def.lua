@@ -11,6 +11,7 @@ CallableAction = {}
 
 ---
 ---@class Action : CallableAction
+---@field instanceId string|nil
 ---@field key string
 ---@field code string
 ---@field description string

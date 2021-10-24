@@ -31,6 +31,7 @@ local function transform_dialog_to_nui_dialog(dialog)
 
     for _, action in ipairs(dialog.actions) do
         table.insert(actions, {
+            instanceId  = dialog.id,
             code        = action.code,
             key         = action.key,
             description = action.description
@@ -59,10 +60,6 @@ function notify_dialog(dialog)
     local id              = generate_id()
     dialog.id             = id
     g_dialogsSessions[id] = dialog;
-
-    for _, action in ipairs(dialog.actions) do
-        action.instanceId = id
-    end
 
     local nuiDialog = transform_dialog_to_nui_dialog(dialog)
 
