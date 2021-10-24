@@ -16,6 +16,10 @@ local function generate_id()
     return tostring(id)
 end
 
+local function get_action_by_code(code, actions)
+
+end
+
 ---@param dialog Dialog
 function notify_dialog(dialog)
     local status, output = VarGuard({
@@ -40,9 +44,14 @@ function notify_dialog(dialog)
 end
 
 core_register_nui_callback('dialog-callback', function(action)
-    local id     = action.instanceId
-    local dialog = g_dialogsSessions[id]
-    print(cfx_require('lmtls-core-shared.inspect')(dialog))
+    local id      = action.instanceId
+    local dialog  = g_dialogsSessions[id]
+    local actions = dialog.actions or {}
+    action        = get_action_by_code(action.code, actions)
+    if not action then
+        return
+    end
+    action.callback()
 end)
 
 core_register_nui_callback('disable-focus-callback', function(_)
@@ -57,7 +66,10 @@ core_register_command('dev:notify:dialog', function(_, args)
             {
                 code        = 'ESCAPE',
                 key         = 'ESC',
-                description = 'ESCAPE IT'
+                description = 'ESCAPE IT',
+                callback    = function()
+                    print('dialog callback event')
+                end
             }
         }
     })
