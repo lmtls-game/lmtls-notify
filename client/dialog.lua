@@ -17,7 +17,32 @@ local function generate_id()
 end
 
 local function get_action_by_code(code, actions)
+    for _, action in ipairs(actions) do
+        if code == action.code then
+            return action
+        end
+    end
+end
 
+---@param dialog Dialog
+---@return NuiDialog
+local function transform_dialog_to_nui_dialog(dialog)
+    local actions = {}
+
+    for _, action in ipairs(dialog.actions) do
+        table.insert(actions, {
+            code        = action.code,
+            key         = action.key,
+            description = action.description
+        })
+    end
+
+    return {
+        id          = dialog.id,
+        type        = dialog.type,
+        description = dialog.description,
+        actions     = actions,
+    }
 end
 
 ---@param dialog Dialog
@@ -39,7 +64,9 @@ function notify_dialog(dialog)
         action.instanceId = id
     end
 
-    core_send_nui_message('dialog', dialog)
+    local nuiDialog = transform_dialog_to_nui_dialog(dialog)
+
+    core_send_nui_message('dialog', nuiDialog)
     core_nui_enable_focus()
 end
 

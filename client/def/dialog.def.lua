@@ -3,19 +3,31 @@
 --- DateTime: 10/17/21 7:51 PM
 ---
 
+
 ---
----@class Action
+---@class CallableAction
+---@field callback function
+CallableAction = {}
+
+---
+---@class Action : CallableAction
 ---@field key string
 ---@field code string
 ---@field description string
----@field callback function
-Action = {}
+Action         = {}
 
 ---
----@class Dialog
+---@class DialogBase
 ---@field id string
 ---@field type string
 ---@field description string
+DialogBase     = {}
+
+---@class Dialog : DialogBase
+---@field actions CallableAction[]
+Dialog         = {}
+
+---@class NuiDialog : DialogBase
 ---@field actions Action[]
-Dialog = {}
+NuiDialog      = {}
 
