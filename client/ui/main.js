@@ -122,18 +122,6 @@ function onDialogMessage(data) {
     }
 }
 
-function messageHandler(event) {
-    event.data ??= event.detail;
-    const { message, data } = event.data;
-    const handler = nuiMessageHandlers[message];
-    if (!handler) {
-        throw new Error("Unknown message handler");
-    }
-
-    handler(data);
-}
-
 (function () {
-    nuiMessageHandlers["dialog"] = onDialogMessage;
-    window.addEventListener("message", messageHandler);
+    registerMessageHandler("dialog", onDialogMessage);
 })();
