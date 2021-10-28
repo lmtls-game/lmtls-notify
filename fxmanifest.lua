@@ -21,3 +21,5 @@ file 'client/ui/**/*.css'
 file 'client/ui/**/*.js'
 file 'client/ui/**/*.otf'
 file 'client/ui/**/*.svg'
+
+dependency 'lmtls-nui'

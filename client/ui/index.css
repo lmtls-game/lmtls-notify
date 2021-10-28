@@ -1,32 +1,22 @@
-@font-face {
-    font-family: Thedus-Bold;
-    src: url("assets/ThedusCondensedLight-Bold.otf") format("opentype");
-}
-
-@font-face {
-    font-family: Thedus-Regular;
-    src: url("assets/ThedusCondensedLight-Regular.otf") format("opentype");
-}
-
-
 *, *:before, *:after {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
+/*noinspection ALL*/
+:root {
+    --f-bold: var(--ff-1);
+    --f-regular: var(--ff-2);
+    --clr-success: #CCED00;
+    --clr-information: #EFEFEF;
+    --clr-error: #CF291D;
+}
+
 html, body {
     width: 100%;
     height: 100%;
     font-family: var(--f-regular);
-}
-
-:root {
-    --f-bold: 'Thedus-Bold';
-    --f-regular: 'Thedus-Regular';
-    --clr-success: #CCED00;
-    --clr-information: #EFEFEF;
-    --clr-error: #CF291D;
 }
 
 .dialog {
