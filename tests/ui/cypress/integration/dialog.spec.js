@@ -23,10 +23,34 @@ function sendNuiMessage(message, data) {
     })));
 }
 
+function defineRegisterMessageHandler(win) {
+    const messageHandlers = {};
+    win.registerMessageHandler = function (message, handler) {
+        messageHandlers[message] = handler;
+    };
+    win.addEventListener("message", function (event) {
+        event.data ??= event.detail;
+
+        const { message, data } = event.data;
+
+        const handler = messageHandlers[message];
+
+        if (!handler) {
+            throw new Error("Unknown message handler");
+        }
+
+        handler(data);
+    });
+}
+
 describe("init", () =>
 {
     beforeEach(() => {
-        cy.visit(APP_URL);
+        cy.visit(APP_URL, {
+            onBeforeLoad(win) {
+                defineRegisterMessageHandler(win);
+            }
+        });
     });
 
     it("should have a display none when loading", () =>
@@ -45,7 +69,11 @@ describe("init", () =>
 describe("message invoked", () =>
 {
     beforeEach(() => {
-        cy.visit(APP_URL);
+        cy.visit(APP_URL, {
+            onBeforeLoad(win) {
+                defineRegisterMessageHandler(win);
+            }
+        });
         cy.intercept("POST", "https://mocked-resource-name/dialog-callback", { body: "{}" }).as("nuiDialogCallback");
         cy.intercept("POST", "https://mocked-resource-name/disable-focus-callback", { body: "{}" }).as("nuiDisableFocusCallback");
     });
