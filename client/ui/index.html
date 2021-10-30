@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="nui://lmtls-nui/css/variables.css" rel="stylesheet">
+    <link href="nui://lmtls-nui/css/variables.css" onerror="this.onerror=null;this.href=this.href.replace('nui://lmtls-nui', 'http://localhost:3000')" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
     <script src="nui://lmtls-nui/js/message-handler.js"></script>
+    <script>window.registerMessageHandler || document.write("<script src=\"http://localhost:3000/js/message-handler.js\">\x3C/script>");</script>
     <script defer src="main.js"></script>
     <title>Notify</title>
 </head>

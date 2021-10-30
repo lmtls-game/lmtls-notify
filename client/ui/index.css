@@ -16,7 +16,7 @@
 html, body {
     width: 100%;
     height: 100%;
-    font-family: var(--f-regular);
+    font-family: var(--ff-1);
 }
 
 .dialog {
@@ -51,7 +51,8 @@ html, body {
 
 .dialog .action__key {
     color: #CCED00;
-    font-family: var(--f-bold);
+    font-weight: bold;
+    font-stretch: condensed;
 }
 
 .dialog .action__description {
@@ -75,7 +76,7 @@ html, body {
 
 .dialog .dialog__title {
     font-size: 3rem;
-    font-family: var(--f-bold);
+    font-weight: bold;
 }
 
 .dialog .dialog__description {
