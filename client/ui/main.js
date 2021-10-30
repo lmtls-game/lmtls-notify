@@ -4,7 +4,6 @@ const dialogDescriptionElement = dialogElement.querySelector("#dialogDescription
 const dialogActionsElement = dialogElement.querySelector("#dialogActions");
 
 let registeredActions = {};
-const nuiMessageHandlers = {};
 const dialogQueue = [];
 
 if (!window.GetParentResourceName) {

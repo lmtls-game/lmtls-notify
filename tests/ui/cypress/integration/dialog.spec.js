@@ -1,4 +1,4 @@
-const APP_URL = "http://localhost:8080/lmtls-notify/client/ui/index.html?_ijt=hk62kdha99tuf2lja51tgnosve&_ij_reload=RELOAD_ON_SAVE";
+const APP_URL = "http://localhost:63342/lmtls-notify/client/ui/index.html?_ijt=hk62kdha99tuf2lja51tgnosve&_ij_reload=RELOAD_ON_SAVE";
 
 const mockDialog = {
     id: "mock-id",
