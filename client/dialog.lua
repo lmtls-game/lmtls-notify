@@ -67,7 +67,7 @@ function notify_dialog(dialog)
     core_nui_enable_focus()
 end
 
-core_register_nui_callback('dialog-callback', function(action)
+core_nui_register_callback('dialog-callback', function(action)
     local id      = action.instanceId
     local dialog  = g_dialogsSessions[id]
     local actions = dialog.actions or {}
@@ -78,7 +78,7 @@ core_register_nui_callback('dialog-callback', function(action)
     action.callback()
 end)
 
-core_register_nui_callback('disable-focus-callback', function(_)
+core_nui_register_callback('disable-focus-callback', function(_)
     core_nui_disable_focus()
 end)
 
