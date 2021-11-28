@@ -63,7 +63,7 @@ function notify_dialog(dialog)
 
     local nuiDialog = transform_dialog_to_nui_dialog(dialog)
 
-    core_send_nui_message('dialog', nuiDialog)
+    core_nui_send_message('dialog', nuiDialog)
     core_nui_enable_focus()
 end
 
