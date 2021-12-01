@@ -19,7 +19,7 @@ function triggerNuiCallback(callback, data) {
         headers: { "Content-Type": "application/json" }
     }).then(r => {
         return r.json();
-    })
+    });
 }
 
 function triggerDialogCallback(data) {

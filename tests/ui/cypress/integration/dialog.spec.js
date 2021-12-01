@@ -1,4 +1,4 @@
-const APP_URL = "http://localhost:63342/lmtls-notify/client/ui/index.html?_ijt=hk62kdha99tuf2lja51tgnosve&_ij_reload=RELOAD_ON_SAVE";
+const APP_URL = "http://localhost:7788";
 
 const mockDialog = {
     id: "mock-id",
@@ -23,34 +23,10 @@ function sendNuiMessage(message, data) {
     })));
 }
 
-function defineRegisterMessageHandler(win) {
-    const messageHandlers = {};
-    win.registerMessageHandler = function (message, handler) {
-        messageHandlers[message] = handler;
-    };
-    win.addEventListener("message", function (event) {
-        event.data ??= event.detail;
-
-        const { message, data } = event.data;
-
-        const handler = messageHandlers[message];
-
-        if (!handler) {
-            throw new Error("Unknown message handler");
-        }
-
-        handler(data);
-    });
-}
-
 describe("init", () =>
 {
     beforeEach(() => {
-        cy.visit(APP_URL, {
-            onBeforeLoad(win) {
-                defineRegisterMessageHandler(win);
-            }
-        });
+        cy.visit(APP_URL);
     });
 
     it("should have a display none when loading", () =>
@@ -69,11 +45,7 @@ describe("init", () =>
 describe("message invoked", () =>
 {
     beforeEach(() => {
-        cy.visit(APP_URL, {
-            onBeforeLoad(win) {
-                defineRegisterMessageHandler(win);
-            }
-        });
+        cy.visit(APP_URL);
         cy.intercept("POST", "https://mocked-resource-name/dialog-callback", { body: "{}" }).as("nuiDialogCallback");
         cy.intercept("POST", "https://mocked-resource-name/disable-focus-callback", { body: "{}" }).as("nuiDisableFocusCallback");
     });

@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="index.css">
     <script src="nui://lmtls-nui/js/message-handler.js"></script>
     <script>window.registerMessageHandler || document.write("<script src=\"http://lmtls-nui/js/message-handler.js\">\x3C/script>");</script>
-    <script defer src="main.js"></script>
+    <script defer src="dialog.js"></script>
+    <script defer src="toast.js"></script>
     <title>Notify</title>
 </head>
 <body>
@@ -27,6 +28,10 @@
             </div>
         </div>
     </div>
+</div>
+
+<div cy-test="toast" id="toast" style="display: none">
+    <div cy-test="toast-text" id="toastText"></div>
 </div>
 </body>
 </html>
