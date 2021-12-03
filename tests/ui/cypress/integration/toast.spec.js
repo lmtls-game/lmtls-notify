@@ -27,16 +27,16 @@ describe("toast", () =>
         cy.get("[cy-test='toast']").should("have.css", "display", "none");
     });
 
-    it("should change the display to block when we invoke message handler", () =>
+    it("should change the display to flex when we invoke message handler", () =>
     {
         sendNuiMessage("toast", { text: "hello world" });
-        cy.get("[cy-test='toast']").should("have.css", "display", "block");
+        cy.get("[cy-test='toast']").should("have.css", "display", "flex");
     });
 
     it("should change display to none after specified seconds", () =>
     {
         sendNuiMessage("toast", { text: "hello world", timeout: 2 });
-        cy.get("[cy-test='toast']").should("have.css", "display", "block");
+        cy.get("[cy-test='toast']").should("have.css", "display", "flex");
         cy.tick(2001);
         cy.get("[cy-test='toast']").should("have.css", "display", "none");
     });
@@ -44,7 +44,7 @@ describe("toast", () =>
     it("should change display to none after a default timeout when data.timeout is undefined", () =>
     {
         sendNuiMessage("toast", { text: "hello world" });
-        cy.get("[cy-test='toast']").should("have.css", "display", "block");
+        cy.get("[cy-test='toast']").should("have.css", "display", "flex");
         cy.tick(5000);
         cy.get("[cy-test='toast']").should("have.css", "display", "none");
     });

@@ -11,6 +11,7 @@
     --clr-success: #CCED00;
     --clr-information: #EFEFEF;
     --clr-error: #CF291D;
+    font-size: .5vw;
 }
 
 html, body {
@@ -131,6 +132,31 @@ html, body {
 }
 
 
-:root {
-    font-size: .5vw;
+/*toast*/
+#toast {
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, -50%);
+    background-color: var(--clr-2);
+    max-width: 480px;
+    display: flex;
+    align-items: center;
+    padding: 1.3em 1em;
+    column-gap: 10px;
 }
+
+#toastIcon {
+    width: 32px;
+    height: 32px;
+}
+
+#toastText {
+    font-size: 2rem;
+    color: var(--clr-3);
+    font-weight: normal;
+    flex: 1;
+    text-align: center;
+}
+
+

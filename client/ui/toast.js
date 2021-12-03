@@ -4,7 +4,7 @@ const toastStack = [];
 
 function onToastMessage(data) {
     toastStack.push(() => {
-        toastElement.style.display = "block";
+        toastElement.style.display = "flex";
         data.timeout ??= 5;
         setTimeout(() => {
             toastStack.shift();
