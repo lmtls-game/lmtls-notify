@@ -35,5 +35,21 @@
     <img alt="" cy-test="toast-icon" id="toastIcon"/>
     <div cy-test="toast-text" id="toastText"></div>
 </div>
+<script>
+    (function () {
+        const iframe = window.top.document.querySelector(`[name='${GetParentResourceName()}']`);
+
+        window.enableCustomizedFrame = () => {
+            iframe.style.zIndex = 99999_9;
+            iframe.style.pointerEvents = "none";
+        };
+
+        window.disableCustomizedFrame = () => {
+            iframe.style.pointerEvents = "unset";
+        };
+
+        enableCustomizedFrame();
+    })();
+</script>
 </body>
 </html>

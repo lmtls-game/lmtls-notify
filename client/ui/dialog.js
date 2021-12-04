@@ -45,7 +45,8 @@ function triggerCallback(action) {
 
     if (dialogQueue.length === 0) {
         dialogElement.style.display = "none";
-        triggerNuiCallback("disable-focus-callback");
+        triggerNuiCallback("disable-focus-callback")
+            .then(enableCustomizedFrame);
     } else
         dialogQueue[0]();
 }
@@ -114,6 +115,7 @@ function onDialogMessage(data) {
 
     dialogQueue.push(() => {
         dialogTypeHandler(data.description, data.actions);
+        disableCustomizedFrame();
     });
 
     if (dialogQueue.length === 1) {
