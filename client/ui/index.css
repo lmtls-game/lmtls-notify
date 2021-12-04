@@ -136,7 +136,7 @@ html, body {
 #toast {
     position: absolute;
     left: 50%;
-    top: 20%;
+    top: 10%;
     transform: translate(-50%, -50%);
     background-color: var(--clr-2);
     max-width: 480px;
@@ -144,6 +144,7 @@ html, body {
     align-items: center;
     padding: 1.5em 1.8em;
     column-gap: 10px;
+    border: 2px solid var(--clr-1)
 }
 
 #toastIcon {
