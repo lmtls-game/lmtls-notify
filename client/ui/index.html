@@ -39,6 +39,12 @@
     (function () {
         const iframe = window.top.document.querySelector(`[name='${GetParentResourceName()}']`);
 
+        const original = window.top.focusFrame;
+        window.top.focusFrame = (frameName) => {
+            original(frameName);
+            enableCustomizedFrame();
+        };
+
         window.enableCustomizedFrame = () => {
             iframe.style.zIndex = 99999_9;
             iframe.style.pointerEvents = "none";
