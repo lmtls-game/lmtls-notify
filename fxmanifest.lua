@@ -11,6 +11,7 @@ shared_script 'require/require.lua'
 shared_script 'varguard/varguard.lua'
 
 client_script 'client/dialog.lua'
+client_script 'client/toast.lua'
 
 client_script 'client/exports.lua' --last
 

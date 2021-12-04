@@ -5,3 +5,4 @@
 
 
 exports('dialog', notify_dialog)
+exports('toast', notify_toast)
