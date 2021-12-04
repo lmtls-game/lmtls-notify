@@ -20,6 +20,7 @@ end
 core_register_command('dev:notify:toast', function(_, args)
     notify_toast({
         text    = args[1] or 'Hello World',
-        timeout = args[2]
+        timeout = tonumber(args[2]),
+        icon    = args[3]
     })
 end)
