@@ -63,4 +63,17 @@ describe("toast", () =>
         cy.tick(5001);
         cy.get("[cy-test='toast-text']").should("have.text", "hello 2");
     });
+
+    it("should be able to set toast icon", () =>
+    {
+        sendNuiMessage("toast", { text: "hello 1", icon: "src-url" });
+        cy.get("[cy-test='toast-icon']").should("have.css", "display", "block");
+        cy.get("[cy-test='toast-icon']").should("have.attr", "src", "src-url");
+    });
+
+    it("should set the display to none of icon element when data.icon is not present", () =>
+    {
+        sendNuiMessage("toast", { text: "hello 1" });
+        cy.get("[cy-test='toast-icon']").should("have.css", "display", "none");
+    });
 });

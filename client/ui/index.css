@@ -142,7 +142,7 @@ html, body {
     max-width: 480px;
     display: flex;
     align-items: center;
-    padding: 1.3em 1em;
+    padding: 1.5em 1.8em;
     column-gap: 10px;
 }
 
