@@ -36,8 +36,14 @@
     <div cy-test="toast-text" id="toastText"></div>
 </div>
 <script>
+    if (!window.GetParentResourceName) {
+        function GetParentResourceName() {
+            return "mocked-resource-name";
+        }
+    }
+
     (function () {
-        const iframe = window.top.document.querySelector(`[name='${GetParentResourceName()}']`);
+        const iframe = window.top.document.querySelector(`[name='${GetParentResourceName()}']`) || document.createElement("div");
 
         const original = window.top.focusFrame;
         window.top.focusFrame = (frameName) => {

@@ -76,4 +76,12 @@ describe("toast", () =>
         sendNuiMessage("toast", { text: "hello 1" });
         cy.get("[cy-test='toast-icon']").should("have.css", "display", "none");
     });
+
+    it("should show the icon when second request has icon", () =>
+    {
+        sendNuiMessage("toast", { text: "hello 1", timeout: 1 });
+        cy.tick(1000);
+        sendNuiMessage("toast", { text: "hello 1", icon: "src-url" });
+        cy.get("[cy-test='toast-icon']").should("have.css", "display", "block");
+    });
 });

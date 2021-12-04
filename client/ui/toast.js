@@ -9,6 +9,7 @@ function onToastMessage(data) {
         data.timeout ??= 5;
         if (data.icon) {
             toastIconElement.src = data.icon;
+            toastIconElement.style.display = "block";
         } else {
             toastIconElement.style.display = "none";
         }

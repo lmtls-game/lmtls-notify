@@ -6,11 +6,6 @@ const dialogActionsElement = dialogElement.querySelector("#dialogActions");
 let registeredActions = {};
 const dialogQueue = [];
 
-if (!window.GetParentResourceName) {
-    function GetParentResourceName() {
-        return "mocked-resource-name";
-    }
-}
 
 function triggerNuiCallback(callback, data) {
     return fetch(`https://${GetParentResourceName()}/${callback}`, {
