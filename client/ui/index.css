@@ -145,6 +145,7 @@ html, body {
     padding: 1em 1.8em;
     column-gap: 10px;
     border: 2px solid var(--clr-1);
+    opacity: .85
 }
 
 #toastIcon {
