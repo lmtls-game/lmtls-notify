@@ -5,4 +5,10 @@
 
 
 exports('dialog', notify_dialog)
-exports('toast', notify_toast)
+exports('toast', function(toast)
+    if type(toast) ~= 'table' then
+        notify_toast({ text = toast })
+        return
+    end
+    notify_toast(toast)
+end)
