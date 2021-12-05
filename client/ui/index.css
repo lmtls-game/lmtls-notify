@@ -142,9 +142,9 @@ html, body {
     max-width: 480px;
     display: flex;
     align-items: center;
-    padding: 1.5em 1.8em;
+    padding: 1em 1.8em;
     column-gap: 10px;
-    border: 2px solid var(--clr-1)
+    border: 2px solid var(--clr-1);
 }
 
 #toastIcon {
