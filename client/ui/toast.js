@@ -1,11 +1,13 @@
 const toastElement = document.getElementById("toast");
 const toastIconElement = document.getElementById("toastIcon");
 const toastTextElement = document.getElementById("toastText");
+const toastSound = new Audio("assets/toast.mp3");
 const toastStack = [];
 
 function onToastMessage(data) {
     toastStack.push(() => {
         toastElement.style.display = "flex";
+        toastSound.play();
         data.timeout ??= 5;
         if (data.icon) {
             toastIconElement.src = data.icon;
