@@ -5,10 +5,21 @@
 
 
 exports('dialog', notify_dialog)
-exports('toast', function(toast)
+
+local function toast_wrapper(toast)
     if type(toast) ~= 'table' then
         notify_toast({ text = toast })
         return
     end
     notify_toast(toast)
+end
+
+exports('toast', toast_wrapper)
+
+exports('toast_success', function(text)
+    toast_wrapper({ text = text, icon = 'assets/clarity_success-standard-line.svg' })
+end)
+
+exports('toast_error', function(text)
+    toast_wrapper({ text = text, icon = 'assets/bx_bx-error-alt.svg' })
 end)
