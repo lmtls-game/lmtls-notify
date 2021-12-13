@@ -22,7 +22,7 @@ function onToastMessage(data) {
                 toastStack[0]();
             }
         }, data.timeout * 1000);
-        toastTextElement.textContent = data.text;
+        toastTextElement.innerHTML = txtiful.txtiful(data.text);
     });
 
     if (toastStack.length === 1) {
