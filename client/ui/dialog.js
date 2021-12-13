@@ -59,7 +59,7 @@ function createActionElement(key, description) {
 
 function setDialog(title, description, actions) {
     dialogTitleElement.textContent = title;
-    dialogDescriptionElement.textContent = description;
+    dialogDescriptionElement.innerHTML = txtiful.txtiful(description);
     dialogActionsElement.innerHTML = "";
     if (!Array.isArray(actions)) {
         return;
