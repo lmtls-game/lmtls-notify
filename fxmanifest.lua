@@ -24,4 +24,3 @@ file 'client/ui/**/*.otf'
 file 'client/ui/**/*.svg'
 file 'client/ui/**/*.mp3'
 
-dependency 'lmtls-nui'
