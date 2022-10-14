@@ -1,123 +1,58 @@
-const dialogElement = document.getElementById("dialog");
-const dialogTitleElement = dialogElement.querySelector("#dialogTitle");
-const dialogDescriptionElement = dialogElement.querySelector("#dialogDescription");
-const dialogActionsElement = dialogElement.querySelector("#dialogActions");
+import {DialogAction, DialogFacade} from "../../js/dialog.js";
 
-let registeredActions = {};
-const dialogQueue = [];
+export function init(window) {
+  const dialogFacade = new DialogFacade();
 
+  class NuiDialogAction extends DialogAction
+  {
+    data;
 
-function triggerNuiCallback(callback, data) {
-    return fetch(`https://${GetParentResourceName()}/${callback}`, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" }
-    }).then(r => {
-        return r.json();
-    });
-}
-
-function triggerDialogCallback(data) {
-    return triggerNuiCallback("dialog-callback", data);
-}
-
-document.onkeyup = function (e) {
-    if (!registeredActions) {
-        return;
+    constructor(key, label) {
+      super(key, label, () => {
+        NuiDialogAction.callback(this);
+      });
     }
 
-    const registeredAction = registeredActions[e.code.toLowerCase()];
-    if (!registeredAction) {
-        return;
+    static parse(data) {
+      const o = new NuiDialogAction(data.code, data.description ?? data.label);
+      o.data = data;
+      return o;
     }
-    triggerCallback(registeredAction);
-};
 
-function triggerCallback(action) {
-    triggerDialogCallback(action);
-
-    dialogQueue.shift();
-
-    if (dialogQueue.length === 0) {
-        dialogElement.style.display = "none";
-        triggerNuiCallback("disable-focus-callback")
-            .then(enableCustomizedFrame);
-    } else
-        dialogQueue[0]();
-}
-
-function createActionElement(key, description) {
-    const actionElement = document.createElement("action");
-    actionElement.innerHTML = `
-        <div class="action">
-            <div class="action__key">[${key}]</div>
-            <div class="action__description">${description}</div>
-        </div>
-    `;
-    return actionElement;
-}
-
-function setDialog(title, description, actions) {
-    dialogTitleElement.textContent = title;
-    dialogDescriptionElement.innerHTML = txtiful.txtiful(description);
-    dialogActionsElement.innerHTML = "";
-    if (!Array.isArray(actions)) {
-        return;
+    static callback(o) {
+      window.nuiCallbackInstance.invokeCallback(o.data);
     }
-    registeredActions = {};
-    for (const action of actions) {
-        let actionElement = createActionElement(action.key, action.description);
-        registeredActions[action.code.toLowerCase()] = action;
-        dialogActionsElement.appendChild(actionElement);
+  }
+
+  function mapActions(actions) {
+    const out = [];
+    for (const rawAction of actions) {
+      out.push(NuiDialogAction.parse(rawAction));
     }
-    dialogElement.style.display = "block";
-}
+    return out;
+  }
 
-function setDialogAsInformation(description, actions) {
-    dialogElement.className = "dialog information";
-    setDialog("INFORMATION", description, actions);
-}
-
-function setDialogAsError(description, actions) {
-    dialogElement.className = "dialog error";
-    setDialog("ERROR", description, actions);
-}
-
-function setDialogAsSuccess(description, actions) {
-    dialogElement.className = "dialog success";
-    setDialog("SUCCESS", description, actions);
-}
-
-function onDialogMessage(data) {
+  function onDialogMessage(data) {
     const type = data.type;
 
     if (!type) {
-        throw new Error("Expected type to be defined");
+      throw new Error("Expected type to be defined");
     }
 
     const dialogHandlers = {
-        success: setDialogAsSuccess,
-        information: setDialogAsInformation,
-        error: setDialogAsError
+      success: dialogFacade.showSuccess,
+      information: dialogFacade.showInformation,
+      error: dialogFacade.showError
     };
 
-    const dialogTypeHandler = dialogHandlers[type.toLowerCase()];
+    const dialogTypeHandler = dialogHandlers[type.toLowerCase()] ?? ((actions) => dialogFacade.show(type, actions));
 
-    if (!dialogTypeHandler) {
-        throw new Error(`Invalid dialog type ${type}`);
-    }
+    const wrapperCallback = () => {
+      dialogTypeHandler.call(dialogFacade, mapActions(data.actions));
+    };
 
+    wrapperCallback(dialogFacade);
+  }
 
-    dialogQueue.push(() => {
-        dialogTypeHandler(data.description, data.actions);
-        disableCustomizedFrame();
-    });
-
-    if (dialogQueue.length === 1) {
-        dialogQueue[0]();
-    }
+  registerMessageHandler("dialog", onDialogMessage);
 }
-
-(function () {
-    registerMessageHandler("dialog", onDialogMessage);
-})();

@@ -24,3 +24,5 @@ file 'client/ui/**/*.otf'
 file 'client/ui/**/*.svg'
 file 'client/ui/**/*.mp3'
 
+file 'js/*.js'
+

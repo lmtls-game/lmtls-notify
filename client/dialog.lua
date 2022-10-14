@@ -61,13 +61,13 @@ function notify_dialog(dialog)
     dialog.id             = id
     g_dialogsSessions[id] = dialog;
 
-    local nuiDialog = transform_dialog_to_nui_dialog(dialog)
+    local nuiDialog       = transform_dialog_to_nui_dialog(dialog)
 
     core_nui_send_message('dialog', nuiDialog)
     core_nui_enable_focus()
 end
 
-core_nui_register_callback('dialog-callback', function(action)
+nuiCallback.invokeCallback(function(action)
     local id      = action.instanceId
     local dialog  = g_dialogsSessions[id]
     local actions = dialog.actions or {}
@@ -88,11 +88,19 @@ core_register_command('dev:notify:dialog', function(_, args)
         description = args[2] or 'This is the description',
         actions     = {
             {
-                code        = 'ESCAPE',
+                code        = 'Escape',
                 key         = 'ESC',
-                description = 'ESCAPE IT',
+                description = 'Cancel',
                 callback    = function()
                     print('dialog callback event')
+                end
+            },
+            {
+                code        = 'Q',
+                key         = 'Exit',
+                description = 'Quit the game',
+                callback    = function()
+                    print('Exiting the game')
                 end
             }
         }

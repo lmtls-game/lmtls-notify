@@ -2,80 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/lmtls-game/lmtls-nui@master/css/variables.css">
-    <link rel="stylesheet"
-          href="index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lmtls-game/lmtls-nui@master/css/variables.css">
+    <link rel="stylesheet" href="index.css">
     <script src="https://unpkg.com/txtiful-js"></script>
     <script src="https://cdn.jsdelivr.net/gh/lmtls-game/lmtls-nui@master/js/message-handler.js"></script>
-    <script defer
-            src="dialog.js"></script>
-    <script defer
-            src="toast.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/lmtls-game/lmtls-nui@master/js/callback.js"></script>
+    <script defer src="toast.js"></script>
+    <script defer type="module" src="main.js"></script>
     <title>Notify</title>
 </head>
 <body>
 
-    <div class="dialog"
-         id="dialog"
-         style="display: none">
-        <div class="dialog__container">
-            <div id="dialogActions"
-                 class="dialog__actions">
-                <!--                    todo: placeholder -->
-            </div>
-
-            <div class="dialog__content">
-                <div class="dialog__icon"></div>
-                <div id="dialogTitle"
-                     class="dialog__title">
-                    <!--                    todo: placeholder -->
-                </div>
-
-                <div id="dialogDescription"
-                     class="dialog__description">
-                    <!--                    todo: placeholder -->
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div cy-test="toast"
-         id="toast"
-         style="display: none">
-        <img alt=""
-             cy-test="toast-icon"
-             id="toastIcon"/>
-        <div cy-test="toast-text"
-             id="toastText"></div>
+    <div id="toast" style="display: none">
+        <img alt="" id="toastIcon"/>
+        <div id="toastText"></div>
     </div>
     <script>
-        if (!window.GetParentResourceName) {
-            function GetParentResourceName() {
-                return "mocked-resource-name";
-            }
+      if (!window.GetParentResourceName) {
+        function GetParentResourceName() {
+          return "mocked-resource-name";
         }
+      }
 
-        (function () {
-            const iframe = window.top.document.querySelector(`[name='${GetParentResourceName()}']`) || document.createElement("div");
+      (function () {
+        const iframe = window.top.document.querySelector(`[name='${GetParentResourceName()}']`) || document.createElement("div");
 
-            const original = window.top.focusFrame;
-            window.top.focusFrame = (frameName) => {
-                original(frameName);
-                enableCustomizedFrame();
-            };
+        const original = window.top.focusFrame;
+        window.top.focusFrame = (frameName) => {
+          original(frameName);
+          enableCustomizedFrame();
+        };
 
-            window.enableCustomizedFrame = () => {
-                iframe.style.zIndex = "999999";
-                iframe.style.pointerEvents = "none";
-            };
+        window.enableCustomizedFrame = () => {
+          iframe.style.zIndex = "999999";
+          iframe.style.pointerEvents = "none";
+        };
 
-            window.disableCustomizedFrame = () => {
-                iframe.style.pointerEvents = "unset";
-            };
+        window.disableCustomizedFrame = () => {
+          iframe.style.pointerEvents = "unset";
+        };
 
-            enableCustomizedFrame();
-        })();
+        enableCustomizedFrame();
+      })();
     </script>
 </body>
 </html>
