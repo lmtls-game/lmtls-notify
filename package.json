@@ -1,0 +1,16 @@
+{
+  "name": "lmtls-notify",
+  "version": "1.0.0",
+  "repository": "git@github.com:lmtls-game/lmtls-notify.git",
+  "author": "0xWaleed <imwaleed@outlook.sa>",
+  "license": "MIT",
+  "scripts": {
+    "test": "yarn node --experimental-vm-modules $(yarn bin jest)"
+  },
+  "type": "module",
+  "devDependencies": {
+    "jest": "^29.1.2",
+    "jest-environment-jsdom": "^29.1.2",
+    "jest-extended": "^3.1.0"
+  }
+}
