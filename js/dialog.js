@@ -3,7 +3,7 @@ export class DialogAction
     /**
      * @param {string} keyCode
      * @param {string} label
-     * @param {function(): boolean} callback
+     * @param {function(): boolean} [callback]
      */
     constructor(keyCode, label, callback) {
         if (typeof keyCode != "string") {
@@ -12,7 +12,7 @@ export class DialogAction
         if (typeof label != "string") {
             throw Error("Expected label to be a string.");
         }
-        if (typeof callback != "function") {
+        if (callback && typeof callback != "function") {
             throw Error("Expected callback to be a function.");
         }
 
@@ -157,7 +157,9 @@ export class Dialog
         if (!action) {
             return;
         }
-        action.callback();
+        if (action.callback) {
+            action.callback();
+        }
         this.destroy();
         return true;
     }

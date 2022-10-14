@@ -23,7 +23,7 @@ describe("DialogAction", () =>
     });
 
     it("should throws when callback is not a function", () => {
-        expect(() => new dialogModule.DialogAction("k", "l")).toThrow("Expected callback to be a function.");
+        expect(() => new dialogModule.DialogAction("k", "l", "xx")).toThrow("Expected callback to be a function.");
     });
 
     it("should throws when label is not a string", () => {
@@ -203,6 +203,13 @@ describe("Dialog", () =>
             instance.handle("Escape");
 
             expect(instanceDestroySpy).toHaveBeenCalledOnce();
+        });
+
+        it("should not throw when callback is null", () => {
+
+            instance.addAction(new dialogModule.DialogAction("Escape", ""));
+
+            expect(() => instance.handle("Escape")).not.toThrow();
         });
     });
 });
