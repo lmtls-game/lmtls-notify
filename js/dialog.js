@@ -237,30 +237,24 @@ export class DialogFacade
         };
     }
 
-    showError(actions) {
-        const dialog = new Dialog("error");
+    show(type, actions) {
+        const dialog = new Dialog(type);
         for (const action of actions) {
             dialog.addAction(action);
         }
         this.dialogManager.addDialog(dialog);
         this.dialogManager.render();
+    }
+
+    showError(actions) {
+        this.show("error", actions);
     }
 
     showSuccess(actions) {
-        const dialog = new Dialog("success");
-        for (const action of actions) {
-            dialog.addAction(action);
-        }
-        this.dialogManager.addDialog(dialog);
-        this.dialogManager.render();
+        this.show("success", actions);
     }
 
     showInformation(actions) {
-        const dialog = new Dialog("information");
-        for (const action of actions) {
-            dialog.addAction(action);
-        }
-        this.dialogManager.addDialog(dialog);
-        this.dialogManager.render();
+        this.show("information", actions);
     }
 }
