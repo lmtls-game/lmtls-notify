@@ -11,6 +11,7 @@
     --clr-success: #CCED00;
     --clr-information: #EFEFEF;
     --clr-error: #CF291D;
+    --clr-warning: #CB9F29FF;
     font-size: .5vw;
 }
 
@@ -132,6 +133,22 @@ html, body {
     color: var(--clr-information);
 }
 
+.dialog.warning {
+    background: linear-gradient(0deg, rgb(203, 159, 41) 0%, rgb(203, 159, 41) 0%, rgba(0, 0, 0, 1) 30%);
+}
+
+.dialog.warning .dialog__content {
+    border: 3px solid var(--clr-warning);
+}
+
+.dialog.warning .dialog__icon {
+    display: none;
+    background-image: url('assets/bx_bx-information-alt.svg');
+}
+
+.dialog.warning .dialog__title {
+    color: var(--clr-warning);
+}
 
 /*toast*/
 #toast {

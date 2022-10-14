@@ -257,4 +257,8 @@ export class DialogFacade
   showInformation(actions) {
     this.show("information", actions);
   }
+
+  showWarning(actions, description) {
+    this.show("warning", actions, description);
+  }
 }
