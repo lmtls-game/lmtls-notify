@@ -117,6 +117,7 @@ html, body {
 }
 
 .dialog.information {
+    background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 0%, rgba(0, 0, 0, 1) 30%);
 }
 
 .dialog.information .dialog__content {
