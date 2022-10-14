@@ -237,8 +237,8 @@ export class DialogFacade
     };
   }
 
-  show(type, actions) {
-    const dialog = new Dialog(type);
+  show(type, actions, description) {
+    const dialog = new Dialog(type, { description });
     for (const action of actions) {
       dialog.addAction(action);
     }
@@ -246,16 +246,16 @@ export class DialogFacade
     this.dialogManager.render();
   }
 
-  showError(actions) {
-    this.show("error", actions);
+  showError(actions, description) {
+    this.show("error", actions, description);
   }
 
-  showSuccess(actions) {
-    this.show("success", actions);
+  showSuccess(actions, description) {
+    this.show("success", actions, description);
   }
 
-  showInformation(actions) {
-    this.show("information", actions);
+  showInformation(actions, description) {
+    this.show("information", actions, description);
   }
 
   showWarning(actions, description) {

@@ -39,19 +39,8 @@ export function init(window) {
       throw new Error("Expected type to be defined");
     }
 
-    const dialogHandlers = {
-      success: dialogFacade.showSuccess,
-      information: dialogFacade.showInformation,
-      error: dialogFacade.showError
-    };
 
-    const dialogTypeHandler = dialogHandlers[type.toLowerCase()] ?? ((actions) => dialogFacade.show(type, actions));
-
-    const wrapperCallback = () => {
-      dialogTypeHandler.call(dialogFacade, mapActions(data.actions));
-    };
-
-    wrapperCallback(dialogFacade);
+    dialogFacade.show(type.toLowerCase(), mapActions(data.actions), data.description);
   }
 
   registerMessageHandler("dialog", onDialogMessage);
