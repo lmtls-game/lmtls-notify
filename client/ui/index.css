@@ -28,7 +28,6 @@ html, body {
     position: absolute;
     left: 0;
     bottom: 0;
-    z-index: 9999999;
 }
 
 .dialog .dialog__container {
