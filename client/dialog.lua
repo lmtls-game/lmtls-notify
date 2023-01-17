@@ -106,3 +106,37 @@ core_register_command('dev:notify:dialog', function(_, args)
         }
     })
 end)
+
+exports('dialog', notify_dialog)
+
+exports('dialog_success', function(description, actions)
+    notify_dialog({
+        type        = 'success',
+        description = description,
+        actions     = actions
+    })
+end)
+
+exports('dialog_error', function(description, actions)
+    notify_dialog({
+        type        = 'error',
+        description = description,
+        actions     = actions
+    })
+end)
+
+exports('dialog_warning', function(description, actions)
+    notify_dialog({
+        type        = 'warning',
+        description = description,
+        actions     = actions
+    })
+end)
+
+exports('dialog_information', function(description, actions)
+    notify_dialog({
+        type        = 'information',
+        description = description,
+        actions     = actions
+    })
+end)

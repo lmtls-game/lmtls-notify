@@ -4,8 +4,6 @@
 ---
 
 
-exports('dialog', notify_dialog)
-
 local function toast_wrapper(toast)
     if type(toast) ~= 'table' then
         notify_toast({ text = toast })
