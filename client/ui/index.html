@@ -1,49 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lmtls-game/lmtls-nui@master/css/style.css">
-    <link rel="stylesheet" href="index.css">
-    <script src="https://unpkg.com/txtiful-js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/lmtls-game/lmtls-nui@master/js/message-handler.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/lmtls-game/lmtls-nui@master/js/callback.js"></script>
-    <script defer src="toast.js"></script>
-    <script defer type="module" src="main.js"></script>
-    <title>Notify</title>
+  <meta charset="UTF-8">
+  <link href="https://cdn.jsdelivr.net/gh/lmtls-game/lmtls-nui@master/css/style.css" rel="stylesheet">
+  <link href="index.css" rel="stylesheet">
+  <script src="https://unpkg.com/txtiful-js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/lmtls-game/lmtls-nui@master/js/message-handler.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/lmtls-game/lmtls-nui@master/js/callback.js"></script>
+  <script defer src="toast.js"></script>
+  <script defer src="main.js" type="module"></script>
+  <title>Notify</title>
 </head>
 <body>
 
-    <div id="toast" style="display: none">
-        <img alt="" id="toastIcon"/>
-        <div id="toastText"></div>
-    </div>
-    <script>
-      if (!window.GetParentResourceName) {
-        function GetParentResourceName() {
-          return "mocked-resource-name";
-        }
-      }
+  <div id="toast" style="display: none">
+    <img alt="" id="toastIcon"/>
+    <div id="toastText"></div>
+  </div>
+  <script>
+		if (!window.GetParentResourceName) {
+			function GetParentResourceName() {
+				return "mocked-resource-name";
+			}
+		}
 
-      (function () {
-        const iframe = window.top.document.querySelector(`[name='${GetParentResourceName()}']`) || document.createElement("div");
+		(function () {
+			const iframe = window.top.document.querySelector(`[name='${GetParentResourceName()}']`) || document.createElement("div");
 
-        const original = window.top.focusFrame;
-        window.top.focusFrame = (frameName) => {
-          original(frameName);
-          enableCustomizedFrame();
-        };
+			const original = window.top.focusFrame;
+			window.top.focusFrame = (frameName) => {
+				original(frameName);
+				enableCustomizedFrame();
+			};
 
-        window.enableCustomizedFrame = () => {
-          iframe.style.zIndex = "999999";
-          iframe.style.pointerEvents = "none";
-        };
+			window.enableCustomizedFrame = () => {
+				iframe.style.zIndex = "999999";
+				iframe.style.pointerEvents = "none";
+			};
 
-        window.disableCustomizedFrame = () => {
-          iframe.style.pointerEvents = "unset";
-        };
+			window.disableCustomizedFrame = () => {
+				iframe.style.pointerEvents = "unset";
+			};
 
-        enableCustomizedFrame();
-      })();
-    </script>
+			enableCustomizedFrame();
+		})();
+  </script>
 </body>
 </html>
